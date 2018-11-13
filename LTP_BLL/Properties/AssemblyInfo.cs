@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("LPT_Game_BLL")]
+[assembly: AssemblyTitle("LTP_BLL")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("LPT_Game_BLL")]
+[assembly: AssemblyProduct("LTP_BLL")]
 [assembly: AssemblyCopyright("Copyright ©  2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("2b2374a0-f800-48b5-a959-b235544fc739")]
+[assembly: Guid("7b59c415-0a51-4629-9782-d3295ac430ff")]
 
 // Version information for an assembly consists of the following four values:
 //

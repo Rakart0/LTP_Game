@@ -4,10 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LPT_Game_BLL
+namespace LTP_BLL
 {
-    class WorldGenerator
+    class LevelManager
     {
-        World world = new World();
+        public int currentevel { get; private set; } = 0;
+
+
+
     }
 }

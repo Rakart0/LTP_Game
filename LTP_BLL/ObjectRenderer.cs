@@ -10,7 +10,7 @@ namespace LTP_BLL
     public class ObjectRenderer
     {
         List<Drawable> RenderedObjects;
-        RenderWindow targetWindow;
+        public RenderWindow targetWindow;
 
         public ObjectRenderer(RenderWindow _targetWindow)
         {

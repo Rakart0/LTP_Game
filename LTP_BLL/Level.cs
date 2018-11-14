@@ -5,11 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace LTP_BLL
 {
     public class Level
     {
         public Vector2f StartingPoint { get; private set; }
+
 
         public Level(Vector2f _startingPoint)
         {
@@ -17,7 +19,7 @@ namespace LTP_BLL
         }
 
 
-        public virtual void Initialize()
+        public virtual void Initialize(GameManager _gm)
         {
 
         }

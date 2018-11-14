@@ -9,14 +9,19 @@ using System.Threading.Tasks;
 
 namespace LTP_BLL
 {
-    class Game
+    public class Game
     {
         public uint WindowWidth { get; private set; }
         public uint WindowHeight { get; private set; }
 
-        public static RenderWindow gameWindown;
-        public ObjectRenderer objectRenderer { get; private set; }
+        public RenderWindow gameWindown;
+        public ObjectRenderer ObjectRenderer { get; private set; }
+        public ObjectUpdater ObjectUpdater { get; private set; }
         private GameManager gameManager;
+
+
+        //To delete :
+        Text fps_Text;
 
         
 
@@ -29,11 +34,26 @@ namespace LTP_BLL
             gameWindown = new RenderWindow(new VideoMode(WindowWidth, WindowHeight), _name);
             gameWindown.Closed += new EventHandler(CloseGame);
 
-            objectRenderer = new ObjectRenderer(gameWindown);
+            ObjectRenderer = new ObjectRenderer(gameWindown);
+            ObjectUpdater = new ObjectUpdater();
           
             Time.InitTime();
+            InitInfo();
 
         }
+
+        private void InitInfo()
+        {
+
+            fps_Text = new Text();
+
+            fps_Text.Font = new Font(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Fonts) + "/arial.ttf");
+            fps_Text.Position = new Vector2f(10, 20);
+            fps_Text.CharacterSize = 12;
+            fps_Text.Color = Color.White;
+            ObjectRenderer.AddRenderedObject(fps_Text);
+        }
+
         public void GameLoop()
         {
           
@@ -45,11 +65,11 @@ namespace LTP_BLL
                 gameWindown.DispatchEvents();
 
                 Time.UpdateTime();
-
+                fps_Text.DisplayedString = "Fps :" + (1 / Time.DeltaTime).ToString();
 
                 gameWindown.Clear(new Color(49, 49, 49));
-
-                objectRenderer.UpdateGfx();
+                ObjectUpdater.UpdateGameObjects();
+                ObjectRenderer.UpdateGfx();
 
                 gameWindown.Display();
             }

@@ -10,7 +10,7 @@ namespace LTP_BLL
     public static class Time
     {
         public static float DeltaTime { get; private set; }
-        public static float gameTimeSinceLaunch { get; private set; }
+        public static float GameTimeSinceLaunch { get; private set; }
         private static Clock TimeClock;
         private static float timeAtLastFrame;
         public static float TimeScale = 1;
@@ -20,13 +20,13 @@ namespace LTP_BLL
             TimeClock = new Clock();
 
             timeAtLastFrame = 0;
-            gameTimeSinceLaunch = 0;
+            GameTimeSinceLaunch = 0;
         }
         public static void UpdateTime()
         {
-            gameTimeSinceLaunch = TimeClock.ElapsedTime.AsSeconds();
-            DeltaTime = (gameTimeSinceLaunch - timeAtLastFrame) * TimeScale;
-            timeAtLastFrame = gameTimeSinceLaunch;
+            GameTimeSinceLaunch = TimeClock.ElapsedTime.AsSeconds();
+            DeltaTime = (GameTimeSinceLaunch - timeAtLastFrame) * TimeScale;
+            timeAtLastFrame = GameTimeSinceLaunch;
 
         }
 

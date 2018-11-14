@@ -61,6 +61,7 @@
     <Compile Include="Level.cs" />
     <Compile Include="LevelManager.cs" />
     <Compile Include="ObjectRenderer.cs" />
+    <Compile Include="ObjectUpdater.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Time.cs" />
   </ItemGroup>

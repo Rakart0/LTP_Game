@@ -6,17 +6,23 @@ using System.Threading.Tasks;
 using LTP_BLL;
 using SFML.System;
 
+
 namespace LTP_Gfx
 {
-     class Level0 
+    public class Level0 : Level
     {
         Vector2f startingPoint;
 
-        public Level0(Vector2f startingPoint)
+        public Level0(Vector2f _startingPoint) : base(_startingPoint)
         {
-            this.startingPoint = startingPoint;
+            startingPoint = _startingPoint;
+            
         }
 
-     
+        public override void Initialize(GameManager _gm)
+        {
+            Player player = new Player(_gm);
+        }
+
     }
 }

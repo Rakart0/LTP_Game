@@ -13,7 +13,7 @@ namespace LTP_BLL
         public LevelManager LevelManager { get; private set; }
         public ObjectRenderer objectRenderer;
         public RenderWindow RenderWindow;
-
+        public PhysicsUpdater PhysicsUpdater;
 
         public void CreateGame(uint _w, uint _h, string _n)
         {
@@ -22,6 +22,7 @@ namespace LTP_BLL
 
             RenderWindow = game.gameWindown;
             objectRenderer = game.ObjectRenderer;
+            PhysicsUpdater = game.PhysicsUpdater;
             
 
 

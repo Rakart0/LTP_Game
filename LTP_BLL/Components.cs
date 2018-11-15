@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace LTP_BLL
 {
+    #region Rendering
     public class RectRenderer : GameObjectComponent
     {
         public RectangleShape rect;
@@ -23,13 +24,40 @@ namespace LTP_BLL
             rect.FillColor = _color;
             _objectRenderer.AddRenderedObject(rect);
         }
-        public override void Update(float deltaTime)
+        public override void Update()
         {
             rect.Position = ParentGo.pos;
 
         }
     }
 
+    public class CircleRenderer : GameObjectComponent
+    {
+        public CircleShape circle;
+        public GameObject ParentGo;
+
+        public CircleRenderer(GameObject _parentGo, uint _radius, Color _color, ObjectRenderer _objectRenderer)
+        {
+            ParentGo = _parentGo;
+
+            circle = new CircleShape();
+            circle.Radius = _radius;
+            circle.Position = ParentGo.pos;
+            circle.FillColor = _color;
+
+            _objectRenderer.AddRenderedObject(circle);
+        }
+
+        public override void Update()
+        {
+            circle.Position = ParentGo.pos;
+        }
+
+    }
+
+    #endregion
+
+    #region Movement
     public class InputMoveable : GameObjectComponent
     {
         public GameObject ParentGo;
@@ -39,7 +67,7 @@ namespace LTP_BLL
             ParentGo = _parentGo;
             speed = _speed;
         }
-        public override void Update(float deltaTime)
+        public override void Update()
         {
             if (Keyboard.IsKeyPressed(Keyboard.Key.Up))
             {
@@ -60,4 +88,53 @@ namespace LTP_BLL
 
         }
     }
+
+    public class PhysicsBody : GameObjectComponent
+    {
+        public GameObject ParentGameObject;
+
+        public Vector2f velocity;
+        const float GRAVITY = 9.8f;
+        public float friction = 0.75f;
+
+        //En dur pour les test
+        public float size;
+
+        public PhysicsBody(GameObject _parentGo)
+        {
+            ParentGameObject = _parentGo;
+            velocity.X = 0;
+            velocity.Y = 0;
+        }
+
+        public override void Update()
+        {
+
+            if (Keyboard.IsKeyPressed(Keyboard.Key.Space))
+            {
+                ParentGameObject.pos.Y = 300;
+                velocity.Y = 0;
+            }
+
+
+
+            //Sale pour le moment
+            if (ParentGameObject.pos.Y >= (600-(size*2)) && velocity.Y > 0)
+            {
+                velocity.Y = -velocity.Y * friction;
+            }
+            else
+            {
+                velocity.Y += GRAVITY * Time.FixedTimeStep;
+
+            }
+
+            ParentGameObject.pos.X += velocity.X;
+            ParentGameObject.pos.Y += velocity.Y;
+
+
+        }
+
+    }
+    #endregion
 }

@@ -22,11 +22,11 @@ namespace LTP_BLL
             pos = _pos;
             _gm.game.ObjectUpdater.updtatableGO.Add(this);
         }
-        public virtual void Update(float deltaTime)
+        public virtual void Update()
         {
             foreach (GameObjectComponent c in Components)
             {
-                c.Update(deltaTime);
+                c.Update();
             }
         }
 

@@ -11,7 +11,7 @@ namespace LTP_BLL
 
         public GameObject gameObject;
 
-        public virtual void Update(float deltaTime)
+        public virtual void Update()
         {
         }
 

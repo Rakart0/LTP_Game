@@ -14,10 +14,13 @@ namespace LTP_BLL
         private static Clock TimeClock;
         private static float timeAtLastFrame;
         public static float TimeScale = 1;
+        public static float FixedTimeStep;
 
         public static void InitTime()
         {
             TimeClock = new Clock();
+
+            FixedTimeStep = 1f / 60f;
 
             timeAtLastFrame = 0;
             GameTimeSinceLaunch = 0;

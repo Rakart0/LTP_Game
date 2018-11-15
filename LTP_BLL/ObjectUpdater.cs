@@ -19,7 +19,7 @@ namespace LTP_BLL
         {
             foreach (GameObject go in updtatableGO)
             {
-                go.Update(Time.DeltaTime);
+                go.Update();
             }
         }
 

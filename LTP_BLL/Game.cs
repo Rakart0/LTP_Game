@@ -18,10 +18,14 @@ namespace LTP_BLL
         public ObjectRenderer ObjectRenderer { get; private set; }
         public ObjectUpdater ObjectUpdater { get; private set; }
         private GameManager gameManager;
+        public PhysicsUpdater PhysicsUpdater;
 
-
+        private float timeUntilNextUpdate = 0f;
+        private const float TARGETFPS = 60;
+        private float fixedTimeStep = 1 / TARGETFPS;
         //To delete :
         Text fps_Text;
+        Text physicsFPSText;
 
         
 
@@ -36,7 +40,8 @@ namespace LTP_BLL
 
             ObjectRenderer = new ObjectRenderer(gameWindown);
             ObjectUpdater = new ObjectUpdater();
-          
+            PhysicsUpdater = new PhysicsUpdater();
+
             Time.InitTime();
             InitInfo();
 
@@ -45,33 +50,61 @@ namespace LTP_BLL
         private void InitInfo()
         {
 
-            fps_Text = new Text();
-
-            fps_Text.Font = new Font(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Fonts) + "/arial.ttf");
-            fps_Text.Position = new Vector2f(10, 20);
-            fps_Text.CharacterSize = 12;
-            fps_Text.Color = Color.White;
+            fps_Text = new Text
+            {
+                Font = new Font(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Fonts) + "/arial.ttf"),
+                Position = new Vector2f(10, 20),
+                CharacterSize = 12,
+                Color = Color.White
+            };
             ObjectRenderer.AddRenderedObject(fps_Text);
+
+            physicsFPSText = new Text
+            {
+                Font = new Font(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Fonts) + "/arial.ttf"),
+                Position = new Vector2f(10, 40),
+                CharacterSize = 12,
+                Color = Color.White
+            };
+            ObjectRenderer.AddRenderedObject(physicsFPSText);
+
+
         }
 
         public void GameLoop()
         {
           
-
+            //Essai game lock à 60fps
 
 
             while (gameWindown.IsOpen)
             {
+
+
+
                 gameWindown.DispatchEvents();
 
                 Time.UpdateTime();
                 fps_Text.DisplayedString = "Fps :" + (1 / Time.DeltaTime).ToString();
-
                 gameWindown.Clear(new Color(49, 49, 49));
+
+                if (timeUntilNextUpdate >= fixedTimeStep)
+                {
+                    physicsFPSText.DisplayedString = "Physics Fps :" + (1 / timeUntilNextUpdate).ToString();
+
+                    PhysicsUpdater.UpdatePhysics();
+                    timeUntilNextUpdate = 0;
+                }
+                else
+                {
+                    timeUntilNextUpdate += Time.DeltaTime;
+                }
+
                 ObjectUpdater.UpdateGameObjects();
                 ObjectRenderer.UpdateGfx();
 
                 gameWindown.Display();
+
             }
         }
 

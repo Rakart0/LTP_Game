@@ -26,4 +26,25 @@ namespace LTP_Gfx
 
         }
     }
+
+    public class Ball
+    {
+        GameObject gameObject;
+
+        public Ball(GameManager _gm, Vector2f pos, byte cR, byte cr2, byte cr3, int rS, float rF)
+        {
+            gameObject = new GameObject(_gm, pos);
+
+
+            CircleRenderer c = new CircleRenderer(gameObject, (uint)rS, new Color(cR, cr2, cr3), _gm.objectRenderer);
+            gameObject.AddComponent(c);
+
+            PhysicsBody p = new PhysicsBody(gameObject);
+            p.size = rS;
+            p.friction = rF;
+            _gm.PhysicsUpdater.PhysicsObjects.Add(p);
+
+        }
+    }
+
 }

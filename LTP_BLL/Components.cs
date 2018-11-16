@@ -44,7 +44,7 @@ namespace LTP_BLL
             circle.Radius = _radius;
             circle.Position = ParentGo.pos;
             circle.FillColor = _color;
-            circle.SetPointCount(8);
+            circle.SetPointCount(16);
 
             _objectRenderer.AddRenderedObject(circle);
         }
@@ -55,46 +55,64 @@ namespace LTP_BLL
         }
 
     }
+    #region poubelle
+    //En fait c'était de la merde
+    //public class QuickCircle : GameObjectComponent
+    //{
 
-    public class QuickCircle : GameObjectComponent
-    {
+    //    public GameObject ParentGO;
+    //    int index;
+    //    VertexArray va;
 
-        public GameObject ParentGO;
-        
+    //    public QuickCircle(GameObject _parentGo, uint _radius, int numberOfVerts, VertexArray _vertexArray, Color _c, int _index)
+    //    {
+    //        A FINIR OU PAS JE SAIS PAS TROP
 
-        public QuickCircle(GameObject _parentGo, uint _radius,int numberOfVerts, VertexArray _vertexArray)
-        {
-            //A FINIR OU PAS JE SAIS PAS TROP
+    //        ParentGO = _parentGo;
+    //        index = _index;
 
-            ParentGO = _parentGo;
+    //        int n = (numberOfVerts * 2);
+    //        Vector2f[] checker = new Vector2f[n];
+    //        int triangleCount = 0;
 
-            int n = (numberOfVerts / 2) * 3;
+    //        for (int i = 0; i < n; i++)
+    //        {
+    //            if % 3 => mettre le vert au centre
 
-            for (int i = 0; i < n; i++)
-            {
-             
+    //            if ((float)i % 4f == 0f)
+    //            {
+    //                if (i != 0)
+    //                {
+    //                    triangleCount++;
+    //                }
+    //                checker[i] = new Vector2f(0, 0);
+    //                _vertexArray.Append(new Vertex(ParentGO.pos, _c));
 
-                float angle = i * (float)(Math.PI*2) / numberOfVerts;
+    //            }
 
-                float circleX = ParentGO.pos.X + _radius * (float)Math.Cos(angle);
-                float circleY = ParentGO.pos.Y + _radius * (float)Math.Sin(angle);
+    //            else
+    //            {
+    //                float angle = (i - (2 * triangleCount)) * (float)(Math.PI * 2) / numberOfVerts;
 
-                if (i % 3 == 0)
-                {
-                    _vertexArray.Append(new Vertex(ParentGO.pos, Color.Cyan));
-                }
+    //                float circleX = ParentGO.pos.X + _radius * (float)Math.Cos(angle);
+    //                float circleY = ParentGO.pos.Y + _radius * (float)Math.Sin(angle);
 
 
-                _vertexArray.Append(new Vertex(new Vector2f(circleX,circleY), Color.Cyan));
-                
-            }
-        }
+    //                checker[i] = new Vector2f(circleX - ParentGO.pos.X, circleY - ParentGO.pos.Y);
 
-        public override void Update()
-        {
-        }
-    }
+    //                _vertexArray.Append(new Vertex(new Vector2f(circleX, circleY), _c));
+    //            }
 
+
+    //        }
+    //    }
+
+    //    public override void Update()
+    //    {
+    //        va.Draw(r, r, r)
+    //    }
+    //}
+    #endregion
     #endregion
 
     #region Movement
@@ -161,7 +179,7 @@ namespace LTP_BLL
             //Sale pour le moment
             if (ParentGameObject.pos.Y >= (600-(size*2)) && velocity.Y > 0)
             {
-                velocity.Y = -velocity.Y * friction;
+                velocity.Y *= - 0.5f;
             }
             else
             {
@@ -169,9 +187,11 @@ namespace LTP_BLL
 
             }
 
+ 
+
             ParentGameObject.pos.X += velocity.X;
             ParentGameObject.pos.Y += velocity.Y;
-
+            Console.WriteLine(velocity.Y.ToString());
 
         }
 

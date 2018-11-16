@@ -35,6 +35,8 @@ namespace LTP_Gfx
         {
             gameObject = new GameObject(_gm, pos);
 
+            //RectRenderer r = new RectRenderer(gameObject, new Vector2f(rS * 2, rS * 2), new Color(cR, cr2, cr3), _gm.objectRenderer);
+            //gameObject.AddComponent(r);
 
             CircleRenderer c = new CircleRenderer(gameObject, (uint)rS, new Color(cR, cr2, cr3), _gm.objectRenderer);
             gameObject.AddComponent(c);
@@ -45,6 +47,22 @@ namespace LTP_Gfx
             _gm.PhysicsUpdater.PhysicsObjects.Add(p);
 
         }
+    }
+
+    public class SimulationBall
+    {
+        GameObject gameObject;
+
+        public SimulationBall(GameManager _gm, VertexArray _va)
+        {
+            gameObject = new GameObject(_gm, new Vector2f(400, 300));
+
+            QuickCircle q = new QuickCircle(gameObject, 25, 16, _va);
+            gameObject.AddComponent(q);
+
+        }
+
+            
     }
 
 }

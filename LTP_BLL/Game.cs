@@ -20,9 +20,8 @@ namespace LTP_BLL
         private GameManager gameManager;
         public PhysicsUpdater PhysicsUpdater;
 
-        private float timeUntilNextUpdate = 0f;
+        private float TimeElapsedThisPhysicFrame = 0f;
         private const float TARGETFPS = 60;
-        private float fixedTimeStep = 1 / TARGETFPS;
         //To delete :
         Text fps_Text;
         Text physicsFPSText;
@@ -77,27 +76,41 @@ namespace LTP_BLL
             //Essai game lock à 60fps
 
 
+                float t = 0f;
+            int numberOfFrameThisSecond = 0;
             while (gameWindown.IsOpen)
             {
 
 
 
                 gameWindown.DispatchEvents();
-
+                
                 Time.UpdateTime();
-                fps_Text.DisplayedString = "Fps :" + (1 / Time.DeltaTime).ToString();
-                gameWindown.Clear(new Color(49, 49, 49));
-
-                if (timeUntilNextUpdate >= fixedTimeStep)
+                if (t >= 0.5f)
                 {
-                    physicsFPSText.DisplayedString = "Physics Fps :" + (1 / timeUntilNextUpdate).ToString();
+                fps_Text.DisplayedString = "Fps :" + (numberOfFrameThisSecond / t).ToString();
+                    physicsFPSText.DisplayedString = "Physics Fps :" + (1 / Time.FixedTimeStep).ToString();
+                    t = 0f;
+                    numberOfFrameThisSecond = 0;
 
-                    PhysicsUpdater.UpdatePhysics();
-                    timeUntilNextUpdate = 0;
                 }
                 else
                 {
-                    timeUntilNextUpdate += Time.DeltaTime;
+                    t += Time.DeltaTime;
+                    numberOfFrameThisSecond++;
+                }
+                gameWindown.Clear(new Color(49, 49, 49));
+                if (TimeElapsedThisPhysicFrame >= Time.FixedDeltaTime)
+                {
+
+                    Time.FixedTimeStep = TimeElapsedThisPhysicFrame;
+
+                    PhysicsUpdater.UpdatePhysics();
+                    TimeElapsedThisPhysicFrame = 0;
+                }
+                else
+                {
+                    TimeElapsedThisPhysicFrame += Time.DeltaTime;
                 }
 
                 ObjectUpdater.UpdateGameObjects();

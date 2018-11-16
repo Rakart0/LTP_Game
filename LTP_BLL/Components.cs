@@ -35,15 +35,16 @@ namespace LTP_BLL
     {
         public CircleShape circle;
         public GameObject ParentGo;
-
+        
         public CircleRenderer(GameObject _parentGo, uint _radius, Color _color, ObjectRenderer _objectRenderer)
         {
-            ParentGo = _parentGo;
-
+            ParentGo = _parentGo;;
+            
             circle = new CircleShape();
             circle.Radius = _radius;
             circle.Position = ParentGo.pos;
             circle.FillColor = _color;
+            circle.SetPointCount(8);
 
             _objectRenderer.AddRenderedObject(circle);
         }
@@ -53,6 +54,45 @@ namespace LTP_BLL
             circle.Position = ParentGo.pos;
         }
 
+    }
+
+    public class QuickCircle : GameObjectComponent
+    {
+
+        public GameObject ParentGO;
+        
+
+        public QuickCircle(GameObject _parentGo, uint _radius,int numberOfVerts, VertexArray _vertexArray)
+        {
+            //A FINIR OU PAS JE SAIS PAS TROP
+
+            ParentGO = _parentGo;
+
+            int n = (numberOfVerts / 2) * 3;
+
+            for (int i = 0; i < n; i++)
+            {
+             
+
+                float angle = i * (float)(Math.PI*2) / numberOfVerts;
+
+                float circleX = ParentGO.pos.X + _radius * (float)Math.Cos(angle);
+                float circleY = ParentGO.pos.Y + _radius * (float)Math.Sin(angle);
+
+                if (i % 3 == 0)
+                {
+                    _vertexArray.Append(new Vertex(ParentGO.pos, Color.Cyan));
+                }
+
+
+                _vertexArray.Append(new Vertex(new Vector2f(circleX,circleY), Color.Cyan));
+                
+            }
+        }
+
+        public override void Update()
+        {
+        }
     }
 
     #endregion

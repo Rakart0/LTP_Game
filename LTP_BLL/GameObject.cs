@@ -16,11 +16,11 @@ namespace LTP_BLL
         public Vector2f pos;
         
 
-        public GameObject(GameManager _gm, Vector2f _pos)
+        public GameObject(Vector2f _pos)
         {
             Components = new List<GameObjectComponent>();
             pos = _pos;
-            _gm.game.ObjectUpdater.updtatableGO.Add(this);
+            Game.AddObjectToUpdateQueue(this);
         }
         public virtual void Update()
         {

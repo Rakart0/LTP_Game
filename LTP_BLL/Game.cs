@@ -1,5 +1,4 @@
 ﻿using SFML.Graphics;
-using SFML.System;
 using SFML.Window;
 using System;
 using System.Collections.Generic;
@@ -9,125 +8,54 @@ using System.Threading.Tasks;
 
 namespace LTP_BLL
 {
-    public class Game
+    public static class Game
     {
-        public uint WindowWidth { get; private set; }
-        public uint WindowHeight { get; private set; }
+        public static RenderWindow RenderWindow { get; private set; }
+        public static GameWindow gameWindow { get; private set; }
 
-        public RenderWindow gameWindown;
-        public ObjectRenderer ObjectRenderer { get; private set; }
-        public ObjectUpdater ObjectUpdater { get; private set; }
-        private GameManager gameManager;
-        public PhysicsUpdater PhysicsUpdater;
+        public static LevelManager LevelManager { get; private set; }
 
-        private float TimeElapsedThisPhysicFrame = 0f;
-        private const float TARGETFPS = 60;
-        //To delete :
-        Text fps_Text;
-        Text physicsFPSText;
 
-        
+        public static PhysicsUpdater PhysicsUpdater { get; private set; }
+        public static ObjectUpdater ObjectUpdater { get; private set; }
+        public static ObjectRenderer ObjectRenderer { get; private set; }
 
-        public Game(uint _w, uint _h, string _name, GameManager _gm)
+
+        public static void CreateGame(uint _w, uint _h, string _n)
         {
-            this.WindowWidth = _w;
-            this.WindowHeight = _h;
-            this.gameManager = _gm;
 
-            gameWindown = new RenderWindow(new VideoMode(WindowWidth, WindowHeight), _name);
-            gameWindown.Closed += new EventHandler(CloseGame);
-
-            ObjectRenderer = new ObjectRenderer(gameWindown);
+            RenderWindow = new RenderWindow(new VideoMode(_w, _h), _n);
             ObjectUpdater = new ObjectUpdater();
+            ObjectRenderer = new ObjectRenderer();
             PhysicsUpdater = new PhysicsUpdater();
 
-            Time.InitTime();
-            InitInfo();
-
+            gameWindow = new GameWindow(_w, _h);
+            LevelManager = new LevelManager();
         }
 
-        private void InitInfo()
+        public static void Update()
         {
-
-            fps_Text = new Text
-            {
-                Font = new Font(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Fonts) + "/arial.ttf"),
-                Position = new Vector2f(10, 20),
-                CharacterSize = 12,
-                Color = Color.White
-            };
-            ObjectRenderer.AddRenderedObject(fps_Text);
-
-            physicsFPSText = new Text
-            {
-                Font = new Font(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Fonts) + "/arial.ttf"),
-                Position = new Vector2f(10, 40),
-                CharacterSize = 12,
-                Color = Color.White
-            };
-            ObjectRenderer.AddRenderedObject(physicsFPSText);
-
+            
+         
+            ObjectUpdater.UpdateGameObjects();
+            ObjectRenderer.UpdateGfx();
 
         }
 
-        public void GameLoop()
+        public static void StartGame()
         {
-          
-            //Essai game lock à 60fps
-
-
-                float t = 0f;
-            int numberOfFrameThisSecond = 0;
-            while (gameWindown.IsOpen)
-            {
-
-
-
-                gameWindown.DispatchEvents();
-                
-                Time.UpdateTime();
-                if (t >= 0.5f)
-                {
-                fps_Text.DisplayedString = "Fps :" + (numberOfFrameThisSecond / t).ToString();
-                    physicsFPSText.DisplayedString = "Physics Fps :" + (1 / Time.FixedTimeStep).ToString();
-                    t = 0f;
-                    numberOfFrameThisSecond = 0;
-
-                }
-                else
-                {
-                    t += Time.DeltaTime;
-                    numberOfFrameThisSecond++;
-                }
-                gameWindown.Clear(new Color(49, 49, 49));
-                if (TimeElapsedThisPhysicFrame >= Time.FixedDeltaTime)
-                {
-
-                    Time.FixedTimeStep = TimeElapsedThisPhysicFrame;
-
-                    PhysicsUpdater.UpdatePhysics();
-                    TimeElapsedThisPhysicFrame = 0;
-                }
-                else
-                {
-                    TimeElapsedThisPhysicFrame += Time.DeltaTime;
-                }
-
-                ObjectUpdater.UpdateGameObjects();
-                ObjectRenderer.UpdateGfx();
-
-                gameWindown.Display();
-
-            }
+            gameWindow.GameLoop();
         }
 
-        private void CloseGame(object sender, EventArgs e)
+        public static void AddObjectToRenderQueue(Drawable d)
         {
-            gameWindown.Close();
+            ObjectRenderer.AddRenderedObject(d);
         }
 
-
+        public static void AddObjectToUpdateQueue(GameObject g)
+        {
+            ObjectUpdater.AddUpdatableObject(g);
+        }
 
     }
 }
-

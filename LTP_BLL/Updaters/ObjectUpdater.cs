@@ -8,7 +8,7 @@ namespace LTP_BLL
 {
     public class ObjectUpdater
     {
-        public List<GameObject> updtatableGO;
+        private List<GameObject> updtatableGO;
 
         public ObjectUpdater()
         {
@@ -21,6 +21,11 @@ namespace LTP_BLL
             {
                 go.Update();
             }
+        }
+
+        public void AddUpdatableObject(GameObject g)
+        {
+            updtatableGO.Add(g);
         }
 
     }

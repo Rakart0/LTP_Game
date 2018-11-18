@@ -10,14 +10,12 @@ namespace LTP_Gfx
 {
     class Program
     {
-        static GameManager gm;
         
         static void Main(string[] args)
         {
-            gm = new GameManager();
-            gm.CreateGame(800, 600, "LTP Michael Harouchi");
-            gm.LevelManager.LoadLevel(new Level0(new Vector2f(400,300)));
-            gm.StartGame();
+            Game.CreateGame(800, 600, "LTP Michael Harouchi");
+            Game.LevelManager.LoadLevel(new Level0(new Vector2f(400,300)));
+            Game.StartGame();
         }
         
     }

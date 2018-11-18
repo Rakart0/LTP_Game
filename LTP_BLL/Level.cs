@@ -19,7 +19,7 @@ namespace LTP_BLL
         }
 
 
-        public virtual void Initialize(GameManager _gm)
+        public virtual void Initialize()
         {
 
         }

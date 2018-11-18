@@ -9,12 +9,14 @@ namespace LTP_BLL
 {
     public class ObjectRenderer
     {
+        public VertexArray v;
+        
         List<Drawable> RenderedObjects;
         public RenderWindow targetWindow;
 
-        public ObjectRenderer(RenderWindow _targetWindow)
+        public ObjectRenderer()
         {
-            targetWindow = _targetWindow;
+            targetWindow = Game.RenderWindow;
             RenderedObjects = new List<Drawable>();
         }
 
@@ -24,6 +26,9 @@ namespace LTP_BLL
             {
                 targetWindow.Draw(drawnObject);
             }
+
+            v.Draw(targetWindow, RenderStates.Default);
+            v.Clear();
         }
 
         public void AddRenderedObject(Drawable d)

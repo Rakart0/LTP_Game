@@ -8,9 +8,9 @@ namespace LTP_BLL
 {
     class CollisionHandler
     {
-        //Actually list of colliders
-        List<GameObject> DynamicColliders;
-        List<GameObject> StaticColliders;
+        //Actually a list of colliders
+        List<Collider> DynamicColliders;
+        List<Collider> StaticColliders;
 
         public void AddStaticCollider() //(Collider c)
         {
@@ -23,6 +23,9 @@ namespace LTP_BLL
         public void CheckCollisions()
         {
             //Check Dynamic against Statics
+            foreach (Collider c in DynamicColliders)
+            {
+            }
             //Check Dynamic against Dynamic
             //Constructor for each type of collider
         }

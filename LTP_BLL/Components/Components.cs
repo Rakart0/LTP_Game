@@ -122,6 +122,8 @@ namespace LTP_BLL
                 ParentGo.pos.X += speed * Time.DeltaTime;
             }
 
+            //Console.WriteLine(ParentGo.pos);
+
         }
     }
 

@@ -34,6 +34,18 @@ namespace LTP_BLL
         {
             Components.Add(c);
         }
+
+        public T GetComponent<T>() where T : GameObjectComponent
+        {
+            foreach (GameObjectComponent c in Components)
+            {
+                if(c.GetType().Equals(typeof (T)))
+                {
+                    return (T)c;
+                }
+            }
+            return null;
+        }
         
 
     }

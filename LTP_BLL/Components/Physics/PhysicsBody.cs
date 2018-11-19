@@ -30,6 +30,16 @@ namespace LTP_BLL
 
         }
 
+        public void AddForce()
+        {
+
+        }
+
+        public void Push()
+        {
+            velocity.Y = -velocity.Y * friction;
+        }
+
         public override void Update()
         {
             
@@ -38,8 +48,9 @@ namespace LTP_BLL
             //Sale pour le moment
             if (ParentGameObject.pos.Y >= (600 - (size)))
             {
-                velocity.Y = -velocity.Y * friction;
+                Push();
             }
+
             else
             {
             velocity.Y += GRAVITY * Time.FixedTimeStep;

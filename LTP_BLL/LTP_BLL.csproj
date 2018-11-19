@@ -56,9 +56,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CollisionHandler.cs" />
     <Compile Include="Components\Components.cs" />
+    <Compile Include="Components\Physics\Collider.cs" />
+    <Compile Include="Components\Physics\Colliders\CircleCollider.cs" />
     <Compile Include="Components\Physics\PhysicsBody.cs" />
-    <Compile Include="Components\Physics\WorldBounds.cs" />
+    <Compile Include="Components\Physics\Colliders\WorldBounds.cs" />
     <Compile Include="Components\Rendering\CircleRenderer.cs" />
     <Compile Include="Components\Rendering\RectRenderer.cs" />
     <Compile Include="GameWindow.cs" />

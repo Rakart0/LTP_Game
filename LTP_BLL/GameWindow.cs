@@ -98,9 +98,10 @@ namespace LTP_BLL
                 {
 
                     Time.FixedTimeStep = TimeElapsedThisPhysicFrame;
-                    Game.CollisionHandler.CheckCollisions();
 
                     PhysicsUpdater.UpdatePhysics();
+                    Game.CollisionHandler.CheckCollisions();
+
                     TimeElapsedThisPhysicFrame = 0;
                 }
                 else

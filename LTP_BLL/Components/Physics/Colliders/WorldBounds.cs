@@ -50,7 +50,8 @@ namespace LTP_BLL
                    // c.Push();
                 }
             }
-            else if (c.position.Y + (c.radius) > y1)
+
+            if (c.position.Y + (c.radius) > y1)
             {
                 c.ParentGameObject.pos.Y = y1 - c.radius;
 

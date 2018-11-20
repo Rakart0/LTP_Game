@@ -28,7 +28,7 @@ namespace LTP_Gfx
             p.friction = 0.5f;
             gameobject.AddComponent(p);
 
-            InputMoveable im = new InputMoveable(gameobject, 50000);
+            InputMoveable im = new InputMoveable(gameobject, 2000);
             gameobject.AddComponent(im);
 
             CircleCollider circleCollider = new CircleCollider(gameobject, 25);

@@ -18,7 +18,7 @@ namespace LTP_BLL
         public float friction = 0.75f;
 
         //En dur pour les test
-        public float size;
+        //public float size;
 
         public PhysicsBody(GameObject _parentGo)
         {

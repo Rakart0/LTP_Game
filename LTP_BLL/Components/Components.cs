@@ -98,28 +98,31 @@ namespace LTP_BLL
     {
         public GameObject ParentGo;
         private float speed;
+        PhysicsBody p;
         public InputMoveable(GameObject _parentGo, float _speed)
         {
             ParentGo = _parentGo;
             speed = _speed;
+            p = ParentGo.GetComponent<PhysicsBody>();
         }
         public override void Update()
         {
             if (Keyboard.IsKeyPressed(Keyboard.Key.Up))
             {
-                ParentGo.pos.Y -= speed*Time.DeltaTime;
+                p.velocity.Y = -speed * Time.DeltaTime;
+                //ParentGo.pos.Y -= speed*Time.DeltaTime;
             }
             else if (Keyboard.IsKeyPressed(Keyboard.Key.Down))
             {
-                ParentGo.pos.Y += speed * Time.DeltaTime;
+                ParentGo.pos.Y += 300 * Time.DeltaTime;
             }
             if (Keyboard.IsKeyPressed(Keyboard.Key.Left))
             {
-                ParentGo.pos.X -= speed * Time.DeltaTime;
+                ParentGo.pos.X -= 300 * Time.DeltaTime;
             }
             else if (Keyboard.IsKeyPressed(Keyboard.Key.Right))
             {
-                ParentGo.pos.X += speed * Time.DeltaTime;
+                ParentGo.pos.X += 300 * Time.DeltaTime;
             }
 
             //Console.WriteLine(ParentGo.pos);

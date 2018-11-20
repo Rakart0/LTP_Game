@@ -24,7 +24,11 @@ namespace LTP_Gfx
             CircleRenderer c = new CircleRenderer(gameobject, 25, new Color(224, 131, 38));
             gameobject.AddComponent(c);
 
-            InputMoveable im = new InputMoveable(gameobject, 300);
+            PhysicsBody p = new PhysicsBody(gameobject);
+            p.friction = 0.5f;
+            gameobject.AddComponent(p);
+
+            InputMoveable im = new InputMoveable(gameobject, 50000);
             gameobject.AddComponent(im);
 
             CircleCollider circleCollider = new CircleCollider(gameobject, 25);
@@ -46,7 +50,7 @@ public class Ball
             gameObject.AddComponent(c);
 
             PhysicsBody p = new PhysicsBody(gameObject);
-            p.size = _size;
+            //p.size = _size;
             p.friction = _friction;
             gameObject.AddComponent(p);
 
@@ -90,7 +94,7 @@ public class Ball
 
 
             PhysicsBody p = new PhysicsBody(go);
-            p.size = r;
+            //p.size = r;
             p.friction = 0.75f;
             go.AddComponent(p);
 

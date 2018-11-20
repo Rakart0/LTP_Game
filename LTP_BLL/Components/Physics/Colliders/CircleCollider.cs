@@ -41,7 +41,7 @@ namespace LTP_BLL
 
         private void CheckCircleCollision(CircleCollider circleCollider)
         {
-            if(MathFunction.Distance(position, circleCollider.position) < (radius + circleCollider.radius))
+            if (MathFunction.Distance(position, circleCollider.position) < (radius + circleCollider.radius))
             {
                 ParentGameObject.GetComponent<CircleRenderer>().circle.FillColor = SFML.Graphics.Color.Blue;
             }
@@ -49,6 +49,7 @@ namespace LTP_BLL
             {
                 ParentGameObject.GetComponent<CircleRenderer>().circle.FillColor = SFML.Graphics.Color.Black;
             }
+
             //Console.WriteLine(MathFunction.Distance(position,circleCollider.position));
         }
     }

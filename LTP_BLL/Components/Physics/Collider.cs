@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace LTP_BLL
 {
-    class Collider : GameObjectComponent
+    public class Collider : GameObjectComponent
     {
-        public virtual void CheckCollision(CircleCollider c)
+        public virtual void CheckCollision(Collider c)
         {
         }
     }

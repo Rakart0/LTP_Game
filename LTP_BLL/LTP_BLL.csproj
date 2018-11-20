@@ -70,6 +70,7 @@
     <Compile Include="Components\GameObjectComponent.cs" />
     <Compile Include="Level.cs" />
     <Compile Include="LevelManager.cs" />
+    <Compile Include="MathFunction.cs" />
     <Compile Include="ObjectRenderer.cs" />
     <Compile Include="Updaters\ObjectUpdater.cs" />
     <Compile Include="Updaters\PhysicsUpdater.cs" />

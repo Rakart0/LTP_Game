@@ -6,34 +6,68 @@ using System.Threading.Tasks;
 
 namespace LTP_BLL
 {
-    class WorldBounds : Collider
+    public class WorldBounds : Collider
     {
         int x1;
         int x2;
         int y1;
         int y2;
+        
 
-        public GameObject ParentGameObject;
-
-        public WorldBounds(int _x1, int _x2, int _y1, int _y2, GameObject _parentGameObject)
+        public WorldBounds(int _x1, int _x2, int _y1, int _y2 )
         {
             x1 = _x1;
             x2 = _x2;
             y1 = _y1;
             y2 = _y2;
-            ParentGameObject = _parentGameObject;
         }
-        
-        public override void CheckCollision(CircleCollider c)
+
+        public override void CheckCollision(Collider c)
         {
-            if (c.position.X < x1)
-            { }
-            else if (c.position.X > x2)
-            { }
-            else if (c.position.Y + c.radius > y1)
-            { c.Push(); }
+            if (c is CircleCollider)
+            {
+                CheckCircleCollision(c as CircleCollider);
+            }
+        }
+
+        public void CheckCircleCollision(CircleCollider c)
+        {
+            if (c.position.X - c.radius < x1)
+            {
+                c.ParentGameObject.pos.X = x1 + c.radius;
+
+                if (c.ParentGameObject.GetComponent<PhysicsBody>() != null)
+                {
+                    //c.Push();
+                }
+            }
+            else if (c.position.X + c.radius > x2)
+            {
+                //c.ParentGameObject.pos.X = x2 - c.radius;
+
+                if (c.ParentGameObject.GetComponent<PhysicsBody>() != null)
+                {
+                   // c.Push();
+                }
+            }
+            else if (c.position.Y + (c.radius) > y1)
+            {
+                c.ParentGameObject.pos.Y = y1 - c.radius;
+
+                if (c.ParentGameObject.GetComponent<PhysicsBody>() != null)
+                {
+                    c.Push();
+                }
+            }
             else if (c.position.Y - c.radius < y2)
-            { c.Push(); }
+            {
+                c.ParentGameObject.pos.Y = y2 + c.radius;
+
+                if (c.ParentGameObject.GetComponent<PhysicsBody>() != null)
+                {
+                    c.Push();
+                }
+            }
         }
 
     }

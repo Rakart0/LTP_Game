@@ -13,7 +13,7 @@ namespace LTP_Gfx
     public class Level0 : Level
     {
         Vector2f startingPoint;
-
+        WorldBounds w;
         public Level0(Vector2f _startingPoint) : base(_startingPoint)
         {
             startingPoint = _startingPoint;
@@ -23,18 +23,21 @@ namespace LTP_Gfx
         public override void Initialize()
         {
             Console.WriteLine("Initializing");
+
             Random rnd = new Random();
             VertexArray va = new VertexArray(PrimitiveType.Quads);
 
-            Quickball q = new Quickball(new Vector2f(400, 300), 25, va, Color.Black, 0);
+             w = new WorldBounds(0, 800, 600, 0);
+            Game.CollisionHandler.AddStaticCollider(w);
+            Console.WriteLine("Added worldBounds");
+
+            //Quickball q = new Quickball(new Vector2f(400, 300), 25, va, Color.Black, 0);
+            Ball b = new Ball(new Vector2f(400, 300), Color.Black, 25, 0.75f);
 
             //int minBallSize = 10;
             //int maxBallSize = 20;
 
-            //Quickball q = new Quickball(_gm, new Vector2f(475, 300), 50, va, Color.Cyan, 0);
-            //Ball b = new Ball(_gm, new Vector2f(325, 300), Color.Blue, 50, 0);
-            
-            //for (int i = 0; i < 1; i++)
+            //for (int i = 0; i < 100; i++)
             //{
             //    Vector2f r = new Vector2f(rnd.Next(0 + maxBallSize, 800 - maxBallSize), rnd.Next(50, 400));
             //    int rc = rnd.Next(0, 255);
@@ -43,10 +46,10 @@ namespace LTP_Gfx
             //    Color c = new Color((byte)rc, (byte)rc2, (byte)rc3);
             //    int rS = rnd.Next(minBallSize, maxBallSize);
             //    float rF = (float)rnd.Next(75, 90) / 100f;
-            //    //Ball b = new Ball(_gm, r, c, rS, rF);
-            //    Quickball q = new Quickball(r, rS, va, c,i);
 
-            //    //SimpleBall s = new SimpleBall(_gm, r, c, rS);
+            //    Quickball q = new Quickball(r, rS, va, c, i);
+            //    //Ball b = new Ball(r, c, rS, rF);
+
             //}
 
             Game.ObjectRenderer.v = va;

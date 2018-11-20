@@ -80,7 +80,7 @@ namespace LTP_BLL
                 renderWindow.DispatchEvents();
                 
                 Time.UpdateTime();
-
+                Game.CollisionHandler.CheckCollisions();
                 if (t >= 0.5f)
                 {
                 fps_Text.DisplayedString = "Fps :" + (numberOfFrameThisSecond / t).ToString();

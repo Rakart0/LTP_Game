@@ -18,12 +18,18 @@ namespace LTP_Gfx
         {
             gameobject = new GameObject(new Vector2f(0, 300));
 
-            RectRenderer rc = new RectRenderer(gameobject, new Vector2f(50, 50), new Color(224, 131, 38));
-            gameobject.AddComponent(rc);
+            //RectRenderer rc = new RectRenderer(gameobject, new Vector2f(50, 50), new Color(224, 131, 38));
+            //gameobject.AddComponent(rc);
+
+            CircleRenderer c = new CircleRenderer(gameobject, 25, new Color(224, 131, 38));
+            gameobject.AddComponent(c);
 
             InputMoveable im = new InputMoveable(gameobject, 300);
             gameobject.AddComponent(im);
 
+            CircleCollider circleCollider = new CircleCollider(gameobject, 25);
+            gameobject.AddComponent(circleCollider);
+            Game.CollisionHandler.AddDynamicCollider(circleCollider);
         }
     }
     
@@ -42,6 +48,12 @@ public class Ball
             PhysicsBody p = new PhysicsBody(gameObject);
             p.size = _size;
             p.friction = _friction;
+            gameObject.AddComponent(p);
+
+
+            CircleCollider circleCollider = new CircleCollider(gameObject, _size);
+            gameObject.AddComponent(circleCollider);
+            Game.CollisionHandler.AddDynamicCollider(circleCollider);
 
         }
     }
@@ -74,15 +86,18 @@ public class Ball
             go = new GameObject( _pos);
 
             CircleBatch c = new CircleBatch(go,(uint)r,16, va, _c, index);
-            //c.isStatic = true;
             go.AddComponent(c);
 
 
             PhysicsBody p = new PhysicsBody(go);
-
-
             p.size = r;
-            p.friction = 0f;
+            p.friction = 0.75f;
+            go.AddComponent(p);
+
+            CircleCollider circleCollider = new CircleCollider(go, r);
+            go.AddComponent(circleCollider);
+            Game.CollisionHandler.AddDynamicCollider(circleCollider);
+
 
         }
 

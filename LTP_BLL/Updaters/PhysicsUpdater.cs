@@ -8,17 +8,17 @@ namespace LTP_BLL
 {
     public class PhysicsUpdater
     {
-        public List<GameObjectComponent> PhysicsObjects;
+        public List<PhysicsBody> PhysicsObjects;
         public PhysicsUpdater()
         {
-            PhysicsObjects = new List<GameObjectComponent>();
+            PhysicsObjects = new List<PhysicsBody>();
         }
 
         public void UpdatePhysics()
         {
-            foreach (GameObjectComponent g in PhysicsObjects)
+            foreach (PhysicsBody g in PhysicsObjects)
             {
-                g.Update();
+                g.UpdatePhysics();
             }
         }
 

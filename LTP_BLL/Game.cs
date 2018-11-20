@@ -19,7 +19,7 @@ namespace LTP_BLL
         public static PhysicsUpdater PhysicsUpdater { get; private set; }
         public static ObjectUpdater ObjectUpdater { get; private set; }
         public static ObjectRenderer ObjectRenderer { get; private set; }
-
+        public static CollisionHandler CollisionHandler { get; private set; }
 
         public static void CreateGame(uint _w, uint _h, string _n)
         {
@@ -28,6 +28,7 @@ namespace LTP_BLL
             ObjectUpdater = new ObjectUpdater();
             ObjectRenderer = new ObjectRenderer();
             PhysicsUpdater = new PhysicsUpdater();
+            CollisionHandler = new CollisionHandler();
 
             gameWindow = new GameWindow(_w, _h);
             LevelManager = new LevelManager();
@@ -56,6 +57,8 @@ namespace LTP_BLL
         {
             ObjectUpdater.AddUpdatableObject(g);
         }
+
+
 
     }
 }

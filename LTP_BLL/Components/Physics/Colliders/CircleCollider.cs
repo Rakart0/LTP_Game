@@ -20,9 +20,13 @@ namespace LTP_BLL
             position = ParentGameObject.pos;
         }
 
-        public void Push()
+        public void PushY()
         {
-            ParentGameObject.GetComponent<PhysicsBody>().Push();
+            ParentGameObject.GetComponent<PhysicsBody>().PushY();
+        }
+        public void PushX()
+        {
+            ParentGameObject.GetComponent<PhysicsBody>().PushX();
         }
 
         public override void Update()
@@ -41,13 +45,32 @@ namespace LTP_BLL
 
         private void CheckCircleCollision(CircleCollider circleCollider)
         {
-            if (MathFunction.Distance(position, circleCollider.position) < (radius + circleCollider.radius))
+            float DistanceBetweenCircles = MathFunction.Distance(position, circleCollider.position);
+            float SumOfRadiuses = radius + circleCollider.radius;
+
+            Vector2f v = new Vector2f((position.X - circleCollider.position.X), (position.Y - circleCollider.position.Y));
+
+            if (DistanceBetweenCircles < SumOfRadiuses)
             {
-                ParentGameObject.GetComponent<CircleRenderer>().circle.FillColor = SFML.Graphics.Color.Blue;
+                //ParentGameObject.GetComponent<CircleRenderer>().circle.FillColor = SFML.Graphics.Color.Blue;
+                Vector2f normalized = MathFunction.NormalizeVector(v);
+
+                //ICI CA BUG HOLA OHE
+
+                circleCollider.gameObject.pos = new Vector2f(normalized.X * SumOfRadiuses, normalized.Y * SumOfRadiuses);
+                
+
+                ////Cétébien
+                //ParentGameObject.GetComponent<PhysicsBody>().velocity.X += circleCollider.ParentGameObject.GetComponent<PhysicsBody>().velocity.X;
+                //ParentGameObject.GetComponent<PhysicsBody>().velocity.Y += circleCollider.ParentGameObject.GetComponent<PhysicsBody>().velocity.Y;
+
+                //circleCollider.ParentGameObject.GetComponent<PhysicsBody>().velocity.X += ParentGameObject.GetComponent<PhysicsBody>().velocity.X;
+                //circleCollider.ParentGameObject.GetComponent<PhysicsBody>().velocity.Y += ParentGameObject.GetComponent<PhysicsBody>().velocity.Y;
+
             }
             else
             {
-                ParentGameObject.GetComponent<CircleRenderer>().circle.FillColor = SFML.Graphics.Color.Black;
+               // ParentGameObject.GetComponent<CircleRenderer>().circle.FillColor = SFML.Graphics.Color.Black;
             }
 
             //Console.WriteLine(MathFunction.Distance(position,circleCollider.position));

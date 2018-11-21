@@ -42,16 +42,18 @@ namespace LTP_BLL
                     staticCollider.CheckCollision(c);
                 }
             }
+            int refIndex = 0;
 
             for (int i = 0; i < DynamicColliders.Count; i++)
             {
-                for (int j = 0; j < DynamicColliders.Count; j++)
+                for (int j = refIndex; j < DynamicColliders.Count; j++)
                 {
                     if (i != j)
                     {
                         DynamicColliders[i].CheckCollision(DynamicColliders[j]);
                     }
                 }
+                refIndex++;
             }
 
             //Check Dynamic against Dynamic

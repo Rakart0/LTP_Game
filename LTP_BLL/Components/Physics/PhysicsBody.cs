@@ -15,7 +15,8 @@ namespace LTP_BLL
 
         public Vector2f velocity;
         const float GRAVITY = 9.8f;
-        public float friction = 0.75f;
+        public float bounce = 0.75f;
+        public float friction = 0.975f;
 
         //En dur pour les test
         //public float size;
@@ -35,15 +36,22 @@ namespace LTP_BLL
 
         }
 
-        public void Push()
+        public void PushY()
         {
-            velocity.Y = -velocity.Y * friction;
+
+            velocity.Y = -velocity.Y * bounce;
+        }
+
+        public void PushX()
+        {
+            velocity.X = -velocity.X * bounce;
+
         }
 
         public void UpdatePhysics()
         {
-                
 
+            velocity.X -= velocity.X * (1-friction);
             velocity.Y += GRAVITY * Time.FixedTimeStep;
            
 

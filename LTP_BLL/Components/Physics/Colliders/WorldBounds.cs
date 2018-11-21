@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SFML.System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -38,16 +39,16 @@ namespace LTP_BLL
 
                 if (c.ParentGameObject.GetComponent<PhysicsBody>() != null)
                 {
-                    //c.Push();
+                    c.PushX();
                 }
             }
             else if (c.position.X + c.radius > x2)
             {
-                //c.ParentGameObject.pos.X = x2 - c.radius;
+                c.ParentGameObject.pos.X = x2 - c.radius;
 
                 if (c.ParentGameObject.GetComponent<PhysicsBody>() != null)
                 {
-                   // c.Push();
+                    c.PushX() ;
                 }
             }
 
@@ -57,7 +58,8 @@ namespace LTP_BLL
 
                 if (c.ParentGameObject.GetComponent<PhysicsBody>() != null)
                 {
-                    c.Push();
+                    c.PushY();
+
                 }
             }
             else if (c.position.Y - c.radius < y2)
@@ -66,7 +68,7 @@ namespace LTP_BLL
 
                 if (c.ParentGameObject.GetComponent<PhysicsBody>() != null)
                 {
-                    c.Push();
+                    c.PushY();
                 }
             }
         }

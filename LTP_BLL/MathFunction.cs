@@ -22,5 +22,19 @@ namespace LTP_BLL
             
         }
 
+        public static float GetVectorLength(Vector2f vector)
+        {
+            return (float)Math.Pow(vector.X, 2) + (float)Math.Pow(vector.Y, 2);
+        }
+
+        public static Vector2f NormalizeVector(Vector2f vector)
+        {
+            float length = GetVectorLength(vector);
+            float x = (float)Math.Sqrt(Math.Pow(vector.X, 2) / length);
+            float y = (float)Math.Sqrt(Math.Pow(vector.Y, 2) / length);
+
+            return new Vector2f(x,y );
+        }
+
     }
 }

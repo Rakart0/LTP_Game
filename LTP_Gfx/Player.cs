@@ -25,7 +25,7 @@ namespace LTP_Gfx
             gameobject.AddComponent(c);
 
             PhysicsBody p = new PhysicsBody(gameobject);
-            p.friction = 0.5f;
+            p.bounce = 0.75f;
             gameobject.AddComponent(p);
 
             InputMoveable im = new InputMoveable(gameobject, 2000);
@@ -51,7 +51,7 @@ public class Ball
 
             PhysicsBody p = new PhysicsBody(gameObject);
             //p.size = _size;
-            p.friction = _friction;
+            p.bounce = _friction;
             gameObject.AddComponent(p);
 
 
@@ -95,7 +95,7 @@ public class Ball
 
             PhysicsBody p = new PhysicsBody(go);
             //p.size = r;
-            p.friction = 0.75f;
+            p.bounce = 0.75f;
             go.AddComponent(p);
 
             CircleCollider circleCollider = new CircleCollider(go, r);

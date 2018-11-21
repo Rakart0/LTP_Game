@@ -114,15 +114,15 @@ namespace LTP_BLL
             }
             else if (Keyboard.IsKeyPressed(Keyboard.Key.Down))
             {
-                ParentGo.pos.Y += 300 * Time.DeltaTime;
+                p.velocity.Y = speed * Time.DeltaTime;
             }
             if (Keyboard.IsKeyPressed(Keyboard.Key.Left))
             {
-                ParentGo.pos.X -= 300 * Time.DeltaTime;
+                p.velocity.X = -speed*3 * Time.DeltaTime;
             }
             else if (Keyboard.IsKeyPressed(Keyboard.Key.Right))
             {
-                ParentGo.pos.X += 300 * Time.DeltaTime;
+                p.velocity.X = speed*3 * Time.DeltaTime;
             }
 
             //Console.WriteLine(ParentGo.pos);

@@ -30,9 +30,17 @@ namespace LTP_BLL
         public static Vector2f NormalizeVector(Vector2f vector)
         {
             float length = GetVectorLength(vector);
-            float x = (float)Math.Sqrt(Math.Pow(vector.X, 2) / length);
-            float y = (float)Math.Sqrt(Math.Pow(vector.Y, 2) / length);
+            float x = (float)Math.Sqrt(Math.Pow(vector.X, 2) / length) * (vector.X/Math.Abs(vector.X));
+            float y = (float)Math.Sqrt(Math.Pow(vector.Y, 2) / length) * (vector.Y/Math.Abs(vector.Y));
 
+            if (float.IsNaN(x))
+            {
+                x = 0;
+            }
+            if (float.IsNaN(y))
+            {
+                y = 0;
+            }
             return new Vector2f(x,y );
         }
 

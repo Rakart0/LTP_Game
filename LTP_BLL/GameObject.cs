@@ -14,7 +14,17 @@ namespace LTP_BLL
     {
         public List<GameObjectComponent> Components { get; private set; }
         public Vector2f pos;
-        
+
+        private bool isPhysics;
+
+        public bool IsPhysics
+
+        {
+            get { return isPhysics; }
+            set { isPhysics = value; }
+        }
+
+
 
         public GameObject(Vector2f _pos)
         {

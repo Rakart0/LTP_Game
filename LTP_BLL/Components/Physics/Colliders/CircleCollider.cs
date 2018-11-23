@@ -58,19 +58,21 @@ namespace LTP_BLL
                 //ICI CA BUG HOLA OHE
 
                 circleCollider.ParentGameObject.pos = new Vector2f(position.X - (normalized.X * SumOfRadiuses), position.Y - (normalized.Y * SumOfRadiuses));
+                
 
 
+                float tempVelY = ParentGameObject.GetComponent<PhysicsBody>().velocity.Y;
                 ////Cétébien
                 //Pousser l'autre
 
-                //ParentGameObject.GetComponent<PhysicsBody>().velocity.X += circleCollider.ParentGameObject.GetComponent<PhysicsBody>().velocity.X;
+                ParentGameObject.GetComponent<PhysicsBody>().velocity.X += circleCollider.ParentGameObject.GetComponent<PhysicsBody>().velocity.X;
 
-                //ParentGameObject.GetComponent<PhysicsBody>().velocity.Y += circleCollider.ParentGameObject.GetComponent<PhysicsBody>().velocity.Y;
+                ParentGameObject.GetComponent<PhysicsBody>().velocity.Y += circleCollider.ParentGameObject.GetComponent<PhysicsBody>().velocity.Y;
 
                 //se pousser soi même
 
-                //circleCollider.ParentGameObject.GetComponent<PhysicsBody>().velocity.X += ParentGameObject.GetComponent<PhysicsBody>().velocity.X;
-                //circleCollider.ParentGameObject.GetComponent<PhysicsBody>().velocity.Y += ParentGameObject.GetComponent<PhysicsBody>().velocity.Y;
+                circleCollider.ParentGameObject.GetComponent<PhysicsBody>().velocity.X -= ParentGameObject.GetComponent<PhysicsBody>().velocity.X;
+                circleCollider.ParentGameObject.GetComponent<PhysicsBody>().velocity.Y -= ParentGameObject.GetComponent<PhysicsBody>().velocity.Y;
 
             }
             else
